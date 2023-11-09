@@ -3,7 +3,7 @@ require 'generators/nopio_scaffold/generator_helpers'
 module NopioScaffold
   module Generators
     # Custom scaffold generator
-    class ControllerGenerator < Rails::Generators::NamedBase
+    class ControllerGenerator < Rails::Generators::Base
       include Rails::Generators::ResourceHelpers
       include NopioScaffold::Generators::GeneratorHelpers
 

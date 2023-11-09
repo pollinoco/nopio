@@ -23,3 +23,5 @@ rails g nopio_scaffold:controller [MODEL_NAME]
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
+rails g nopio_scaffold:controller Trial
