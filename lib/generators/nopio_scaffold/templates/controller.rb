@@ -18,7 +18,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def new
     add_breadcrumb I18n.t('backoffice.<%= plural_name %>'), <%= plural_name %>_path
     add_breadcrumb I18n.t('backoffice.buttons.new_<%= singular_name %>')
-    @<%= singular_name %> = <%= orm_class.build(class_name) %>
+    @<%= singular_name %> = <%= singular_name.build(class_name) %>
   end
 
   def edit
@@ -27,7 +27,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   end
 
   def create
-    @<%= singular_name %> = <%= orm_class.build(class_name, "#{singular_name}_params") %>
+    @<%= singular_name %> = <%= singular_name.build(class_name, "#{singular_name}_params") %>
     respond_to do |format|
       if @<%= singular_name.save %>
         format.html { redirect_to @<%= singular_name %>, notice: t('<%= class_name.underscore.humanize %>.was_created') }
