@@ -1,0 +1,61 @@
+<div class="content-wrapper">
+  <div class="card">
+    <ol class="breadcrumb border-bottom">
+      <%%= render_breadcrumbs tag: :li, separator: raw(" #{icon("far", "angle-right")} ") %>
+    </ol>
+    <div class="card-body">
+      <div class="card-panel-header d-flex justify-content-between border-bottom">
+        <h4 class="card-panel-title"><%%= t("backoffice.<%= plural_table_name %>") %></h4>
+        <div class="right-block">
+          <%%= link_to raw("#{icon('fas', 'plus', class: "btn-icon-prepend")} #{t("backoffice.buttons.new_<%= singular_table_name %>")}"), new_<%= singular_table_name %>_path, class: "btn btn-primary btn-sm btn-icon-text", data: { disable_with: icon("far", "sync-alt fa-spin") } %>
+        </div>
+      </div><%% if @<%= plural_table_name %>.blank? %>
+      <div class="alert alert-primary text-center mt-4">
+        <%%= t("<%= plural_table_name %>.empty") %>
+      </div><%% else %>
+      <%%= render "partials/top_pagy" %>
+      <div class="row">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th class="text-center w20"><%%= t("backoffice.tables.th_position") %></th>
+                  <th class="text-center w50"><%%= t("backoffice.tables.th_title_id") %></th>
+                  <th class="text-center w50"></th>
+                  <th><%%= t("backoffice.tables.th_title_<%= singular_table_name %>") %></th>
+                  <th></th>
+                  <th class="text-center"><%%= t("backoffice.tables.th_status") %></th>
+                  <th class="w20"></th>
+                  <th class="w20"></th>
+                  <th class="w20"></th>
+                </tr>
+              </thead>
+              <tbody id="tabs" class="sort-table" data-update-url="<%%= sort_<%= plural_table_name %>_path %>"><%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+                <%%= content_tag :tr, class: 'tab', id: "<%= singular_table_name %>_#{<%= singular_table_name %>.id}" do -%>
+                  <td class="text-center handle"><%%= icon('far', 'arrows-alt-v') %></td>
+                  <td class="text-center"><%%= <%= singular_table_name %>.id %></td>
+                  <td class="text-center">
+                  </td>
+                  <td><%%#= link_to <%= singular_table_name %>.name, <%= singular_table_name %>, title: <%= singular_table_name %>.name %></td>
+                  <td class="text-center"></td>
+                  <td class="text-center"><span class="badge text-bg-<%%#= <%= singular_table_name %>.status.color %>"><%%#= <%= singular_table_name %>.status.name %></span></td>
+                  <td class="text-center">
+                    <%%= link_to raw(icon("fas", "edit")), edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: 'text-primary' %>
+                  </td>
+                  <td class="text-center">
+                    <%%= link_to raw(icon('fas', 'times')), <%= singular_table_name %>_path(<%= singular_table_name %>), method: :delete, data: { commit: t("backoffice.buttons.confirm"), cancel: t("backoffice.buttons.cancel"), title: t("backoffice.helpers.are_you_sure"), confirm: t('<%= plural_table_name %>.destroy_confirm') }, class: 'text-danger' %>
+                  </td>
+                  <td class="text-center">
+                    <%%#= link_to raw(icon('fas', 'exclamation-triangle')), hard_destroy_<%= singular_table_name %>_path(<%= singular_table_name %>), method: :delete, data: { commit: t("backoffice.buttons.confirm"), cancel: t("backoffice.buttons.cancel"), title: t("backoffice.helpers.are_you_sure"), confirm: t('<%= plural_table_name %>.destroy_confirm') }, class: 'text-dark' %>
+                  </td>
+                <%% end -%><%% end %>
+              </tbody>
+            </table>
+          </div>
+          <%%== render partial: 'pagy/bootstrap_nav', locals: { pagy: @pagy } if @pagy.pages > 1 %>
+        </div>
+      </div><%% end %>
+    </div>
+  </div>
+</div>

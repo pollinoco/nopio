@@ -1,0 +1,20 @@
+<div class="content-wrapper">
+  <div class="card">
+    <ol class="breadcrumb border-bottom">
+      <%%= render_breadcrumbs tag: :li, separator: raw("#{icon("far", "angle-right")}") %>
+    </ol>
+    <div class="card-body">
+      <div class="card-panel-header d-flex justify-content-between border-bottom">
+        <h4 class="card-panel-title"><%%= t('backoffice.<%= plural_table_name %>') %></h4>
+        <div class="right-block">
+          <%%= link_to raw("#{icon("fas", "arrow-left", class: "btn-icon-prepend")} #{t("backoffice.words.back")}"), "javascript:;", class: "btn btn-info btn-sm btn-icon-text goBack", data: { disable_with: icon("far", "sync-alt fa-spin") } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-8 offset-xl-2 pt-5 pb-5">
+          <%%= render 'form', <%= singular_table_name %>: @<%= singular_table_name %> %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

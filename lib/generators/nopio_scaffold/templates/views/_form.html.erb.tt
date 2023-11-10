@@ -1,0 +1,33 @@
+<%%= form_with(model: <%= singular_table_name %>, local: true, html: { multipart: true, class: "to-right" }) do |form| %><%% if <%= singular_table_name %>.errors.any? %>
+  <div class="alert alert-danger alert-dismissable hide-item">
+    <button type="button" class="btn-close" data-dismiss="alert"></button>
+    <h4><%%= t("backoffice.errors.verify") %> (<%%= <%= singular_table_name %>.errors.size %> <%%= t("backoffice.error").pluralize(<%= singular_table_name %>.errors.size) %>)</h4>
+    <ul><%% <%= singular_table_name %>.errors.full_messages.each do |message| %>
+      <li><%%= message %></li><%% end %>
+    </ul>
+  </div>
+  <div class="alert alert-danger alert-dismissable">
+    <button type="button" class="btn-close" data-dismiss="alert"></button>
+    <%%= t("backoffice.errors.verify") %> (<%%= <%= singular_table_name %>.errors.size %> <%%= t("backoffice.error").pluralize(<%= singular_table_name %>.errors.size) %>)
+  </div>
+  <div class="sep-space"></div><%% end %>
+  <div class="block-title border-bottom"><%%= t("<%= plural_table_name %>.sep_info") %></div><% attributes.each do |attribute| -%><% if not attribute.name == 'slug' || attribute.name == 'hash_code' || attribute.name == 'deleted_at' || attribute.name == 'store_id' || attribute.name == 'status_id' || attribute.name == 'position' %>
+  <div class="form-group row">
+    <%%= form.label :<%= attribute.name %>, raw("<strong>*</strong> #{t("backoffice.forms.<%= attribute.name %>")}"), class: "col-sm-3 form-control-label" %>
+    <div class="col-sm-7">
+      <%%= form.<%= attribute.field_type %> :<%= attribute.name %>, class: "form-control" %>
+      <%%= error_message_for(<%= singular_table_name %>, :<%= attribute.name %>) %>
+    </div>
+  </div><% end %><% end -%>
+<div class="sep-line"></div>
+  <div class="form-group row last">
+    <%%= form.label :status_id, raw("<strong>*</strong>#{t("backoffice.forms.status")}"), class: "col-sm-3 form-control-label" %>
+    <div class="col-sm-4">
+      <%%#= form.collection_select(:status_id, Status.<%= plural_table_name %>, :id, :name, { prompt: t('backoffice.forms.status_select') }, { class: "form-control" }) %>
+      <%%= error_message_for(<%= singular_table_name %>, :status_id) %>
+    </div>
+  </div>
+  <div class="form-box-action">
+    <%%= button_tag t("backoffice.buttons.save"), class: "btn btn-primary btn-lg", data: { disable_with: icon("far", "sync-alt fa-spin") } %>
+  </div>
+<%% end %>

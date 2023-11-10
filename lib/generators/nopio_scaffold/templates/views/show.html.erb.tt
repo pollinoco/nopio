@@ -1,0 +1,39 @@
+<div class="content-wrapper">
+  <div class="card">
+    <ol class="breadcrumb border-bottom">
+      <%%= render_breadcrumbs tag: :li, separator: raw(" #{icon("far", "angle-right")} ") %>
+    </ol>
+    <div class="card-body">
+      <div class="card-panel-header d-flex justify-content-between border-bottom">
+        <h4 class="card-panel-title"><%%= t("backoffice.<%= plural_table_name %>") %></h4>
+        <div class="right-block">
+          <%%= link_to raw("#{icon('fas', 'edit', class: "btn-icon-prepend")} #{t("backoffice.buttons.edit_<%= singular_table_name %>")}"), edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: "btn btn-primary btn-sm btn-icon-text", data: { disable_with: icon("far", "sync-alt fa-spin") } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-8 offset-xl-2 pt-5 pb-5">
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th colspan="2" class="text-center th-head"><%%= t("<%= plural_table_name %>.sep_info") %></th>
+                </tr>
+              </thead>
+              <tbody><%- attributes.each do |attribute| -%>
+                <tr>
+                  <td class="text-end" width="50%"><%= attribute.human_name %></td>
+                  <td><%%= @<%= singular_table_name %>.<%= attribute.name %> %></td>
+                </tr>
+                <%- end -%>
+                <tr>
+                  <td class="text-end"><%%= t("backoffice.forms.status") %></td>
+                  <td><span class="badge text-bg-<%%#= @<%= singular_table_name %>.status.color %>"><%%#= @<%= singular_table_name %>.status.name %></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
