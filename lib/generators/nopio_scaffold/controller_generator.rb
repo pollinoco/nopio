@@ -17,7 +17,7 @@ module NopioScaffold
 
       def copy_controller_and_spec_files
         template 'controller.rb', File.join('app/controllers', "#{controller_file_name}_controller.rb")
-        template 'spec/controller.rb', File.join('spec/controllers', "#{controller_file_name}_controller_spec.rb")
+        # template 'spec/controller.rb', File.join('spec/controllers', "#{controller_file_name}_controller_spec.rb")
       end
 
       def copy_view_files
@@ -37,7 +37,7 @@ module NopioScaffold
 
       def add_abilities
         ability_string = "\n    can :manage, #{class_name}, user_id: user.id"
-        inject_into_file Rails.root.join('app/models/ability.rb').to_s, ability_string, after: /def initialize[a-z()]+/i
+        # inject_into_file Rails.root.join('app/models/ability.rb').to_s, ability_string, after: /def initialize[a-z()]+/i
       end
     end
   end
