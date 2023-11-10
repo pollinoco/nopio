@@ -29,7 +29,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def create
     @<%= singular_name %> = <%= class_name %>.new(<%= singular_name %>_params)
     respond_to do |format|
-      if @<%= singular_name.save %>
+      if @<%= singular_name %>.save
         format.html { redirect_to @<%= singular_name %>, notice: t('<%= class_name.underscore.humanize %>.was_created') }
       else
         add_breadcrumb I18n.t('backoffice.<%= plural_name %>'), <%= plural_name %>_path
