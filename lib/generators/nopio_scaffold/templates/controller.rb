@@ -27,7 +27,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   end
 
   def create
-    @<%= singular_name %> = <%= singular_name.build(class_name, "#{singular_name}_params") %>
+    @<%= singular_name %> = <%= class_name %>.new(<%= singular_name %>_params)
     respond_to do |format|
       if @<%= singular_name.save %>
         format.html { redirect_to @<%= singular_name %>, notice: t('<%= class_name.underscore.humanize %>.was_created') }
