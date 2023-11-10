@@ -18,7 +18,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def new
     add_breadcrumb I18n.t('backoffice.<%= plural_name %>'), <%= plural_name %>_path
     add_breadcrumb I18n.t('backoffice.buttons.new_<%= singular_name %>')
-    @<%= singular_name %> = <%= singular_name.build(class_name) %>
+    @<%= singular_name %> = <%= class_name %>.new
   end
 
   def edit
