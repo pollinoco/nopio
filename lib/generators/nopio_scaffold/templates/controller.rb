@@ -42,7 +42,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def update
     respond_to do |format|
       if @<%= singular_name %>.update(<%= singular_name %>_params)
-        format.html { redirect_to @<%= singular_name %>, notice: t('<%= singular_name %>.was_updated') }
+        format.html { redirect_to @<%= singular_name %>, notice: t('<%= plural_name %>.was_updated') }
       else
         add_breadcrumb I18n.t('backoffice.<%= plural_name %>'), <%= plural_name %>_path
         add_breadcrumb I18n.t('backoffice.buttons.edit_<%= singular_name %>')
@@ -62,7 +62,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def hard_destroy
     @<%= singular_name %>.really_destroy!
     respond_to do |format|
-      format.html { redirect_to <%= plural_name %>_url, notice: t('<%= singular_name %>.was_deleted') }
+      format.html { redirect_to <%= plural_name %>_url, notice: t('<%= plural_name %>.was_deleted') }
     end
   end
 
@@ -76,8 +76,8 @@ class <%= controller_class_name %>Controller < ApplicationController
   private
 
   def set_<%= singular_name %>
-    @<%= singular_name %> = <%= class_name %>.where('hash_code = ?', params[:id]).first
-    redirect_if_not_found('@<%= singular_name %> no existe en set_<%= singular_name %>') if @<%= singular_name %>.blank?
+    @<%= singular_name %> = <%= class_name %>.find_by(hash_code: params[:id])
+    redirect_if_not_found('<%= class_name %> no existe en set_<%= singular_name %>') if @<%= singular_name %>.blank?
   end
 
   def <%= singular_name %>_params
