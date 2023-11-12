@@ -30,7 +30,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     @<%= singular_name %> = <%= class_name %>.new(<%= singular_name %>_params)
     respond_to do |format|
       if @<%= singular_name %>.save
-        format.html { redirect_to @<%= singular_name %>, notice: t('<%= singular_name %>.was_created') }
+        format.html { redirect_to @<%= singular_name %>, notice: t('<%= plural_name %>.was_created') }
       else
         add_breadcrumb I18n.t('backoffice.<%= plural_name %>'), <%= plural_name %>_path
         add_breadcrumb I18n.t('backoffice.buttons.new_<%= singular_name %>')
@@ -55,7 +55,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def destroy
     @<%= singular_name %>.destroy
     respond_to do |format|
-      format.html { redirect_to <%= plural_name %>_url, notice: t('<%= singular_name %>.was_deleted') }
+      format.html { redirect_to <%= plural_name %>_url, notice: t('<%= plural_name %>.was_deleted') }
     end
   end
 
